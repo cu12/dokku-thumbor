@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+export THUMBOR_IMAGE=${THUMBOR_IMAGE:="apsl/thumbor"}
+export THUMBOR_IMAGE_VERSION=${THUMBOR_IMAGE_VERSION:="latest"}
+export THUMBOR_ROOT=${THUMBOR_ROOT:="/var/lib/dokku/services/thumbor"}
+
+export PLUGIN_COMMAND_PREFIX="thumbor"
+export PLUGIN_DATA_ROOT=$THUMBOR_ROOT
+export PLUGIN_DATASTORE_PORTS=(8000)
+export PLUGIN_DEFAULT_ALIAS="THUMBOR"
+export PLUGIN_ALT_ALIAS="DOKKU_THUMBOR"
+export PLUGIN_IMAGE=$THUMBOR_IMAGE
+export PLUGIN_IMAGE_VERSION=$THUMBOR_IMAGE_VERSION
+export PLUGIN_SCHEME="http"
+export PLUGIN_SERVICE="Thumbor"
+export PLUGIN_BASE_PATH="$PLUGIN_PATH"
+if [[ -n $DOKKU_API_VERSION ]]; then
+  export PLUGIN_BASE_PATH="$PLUGIN_ENABLED_PATH"
+fi
+
+if [[ -d "$PLUGIN_DATA_ROOT/*" ]]; then
+  rm -rf "${PLUGIN_DATA_ROOT:?}/*"
+fi
