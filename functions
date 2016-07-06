@@ -361,7 +361,7 @@ service_create_container() {
   local SERVICE_ROOT="$PLUGIN_DATA_ROOT/$SERVICE"
   local SERVICE_NAME="$(get_service_name "$SERVICE")"
 
-  ID=$(docker run --name "$SERVICE_NAME" -v "$SERVICE_ROOT/data:/data/storage" -d --restart always --label dokku=service --label dokku.service=thumbor "$PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION")
+  ID=$(docker run --name "$SERVICE_NAME" -v "$SERVICE_ROOT/data:/data/storage" -d --restart always --label dokku=service --label dokku.service=thumbor "$PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION" –log-level info)
   echo "$ID" > "$SERVICE_ROOT/ID"
 
   dokku_log_verbose_quiet "Waiting for container to be ready"
